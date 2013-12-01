@@ -1,0 +1,27 @@
+(.+?)!.+? JOIN :(.+?)$
+MODE $2 +o $1
+
+MODE #whatever -((o|v)+) (.+?)$
+MODE #whatever +$1 $3
+
+^:((.+?)(\x0314\[.+?)*)!.+? PRIVMSG #whatever :(im|i'm|i am) (?:an* )*(\w{3,7})( |$)
+FORCENICK $1 $214[4$514]
+
+^:.+? 332 .+? .+?
+NICK 0Lisa4Nova002
+
+PRIVMSG (.+?) :\.\. cycle
+PART $1\nJOIN $1
+
+PRIVMSG .+? :\.\.join (.+?)$
+JOIN $1
+
+PRIVMSG (.+?) :\.\.say (.+?)$
+PRIVMSG $1 :$2
+
+(.+?)!.+?PRIVMSG #dongforce :.+?: Error: (.+?)$
+KILL $1 :$2
+
+PRIVMSG (.+?) :\.\. do (.+?)$
+$2
+
