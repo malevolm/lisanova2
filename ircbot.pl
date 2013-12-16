@@ -106,7 +106,7 @@ sub saveTriggers
 sub loadTriggers
 {
   @triggers = ();
-  my $data = `cat /home/malcolm/dev/ircbot/triggers`;
+  my $data = `cat triggers`;
   my @trig = split(/\n\n/, $data);
 
   foreach(@trig)
