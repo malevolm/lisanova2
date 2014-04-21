@@ -19,9 +19,6 @@ JOIN $1
 PRIVMSG (.+?) :\.\.say (.+?)$
 PRIVMSG $1 :$2
 
-(.+?)!.+?PRIVMSG #dongforce :.+?: Error: (.+?)$
-KILL $1 :$2
-
 PRIVMSG (.+?) :\.\. do (.+?)$
 $2
 
