@@ -9,17 +9,15 @@ my $fsck = IO::Socket::INET->new(PeerAddr => $ARGV[0],
                                  PeerPort => 6667,
                                  Proto    => 'tcp') or die("couldn't connect");
 
-print $fsck "PASS LiSaNoVATwo\r\n";
 print $fsck "NICK $ARGV[1]\r\n";                                 
 print $fsck "USER wat 8 * :wat\r\n";
       
 while(my $line = <$fsck>)
 {
   $line =~ s/\r\n$//;
-  print ">>> $line\n";
+
   @parts = ($line =~ m/^:(.+?)!(.+?)@(.+?) (.+?) :*(.+?)( :|$)(.*?)$/g); 
-  print "}}} @parts\n";
-  
+
   print $fsck "PONG :$1\n"
     if($line =~ m/^PING :(.+?)$/);
   
@@ -47,7 +45,6 @@ while(my $line = <$fsck>)
       if($parts[6] =~ m/^\.\. \+t (.+?) \=\> (.+?)$/g)
       {
         push (@triggers, {"trigger" => $1, "response" => $2});
-        print "&&& added trigger: $1 \nand response: $2\narray: @triggers\n";
       }
       elsif($parts[6] =~ m/^\.\. update (\d+?) (.+?) \=\> (.+?)$/g)
       {
